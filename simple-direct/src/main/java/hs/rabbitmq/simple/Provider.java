@@ -174,7 +174,7 @@ public class Provider {
      */
     public static void testExclusiveC() throws IOException, TimeoutException {
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("59.110.41.57");
+        connectionFactory.setHost("127.0.0.1");
         connectionFactory.setPort(5672);
         connectionFactory.setVirtualHost("/test");
         connectionFactory.setUsername("admin");

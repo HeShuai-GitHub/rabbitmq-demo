@@ -19,7 +19,7 @@ public class RabbitmqConfig {
     private static ConnectionFactory connectionFactory = new ConnectionFactory();
     static {
         // 连接rabbitmq的主机
-        connectionFactory.setHost("59.110.41.57");
+        connectionFactory.setHost("127.0.0.1");
         // 设置连接端口号
         connectionFactory.setPort(5672);
         /**
