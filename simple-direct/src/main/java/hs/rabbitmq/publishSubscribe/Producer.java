@@ -1,8 +1,7 @@
-package hs.rabbitmq.publishSbscribe;
+package hs.rabbitmq.publishSubscribe;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.MessageProperties;
 import hs.rabbitmq.config.RabbitmqConfig;
 import org.junit.Test;
 

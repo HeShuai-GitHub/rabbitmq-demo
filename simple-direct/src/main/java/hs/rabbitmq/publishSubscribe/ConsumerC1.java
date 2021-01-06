@@ -1,4 +1,4 @@
-package hs.rabbitmq.publishSbscribe;
+package hs.rabbitmq.publishSubscribe;
 
 import com.rabbitmq.client.*;
 import hs.rabbitmq.config.RabbitmqConfig;
@@ -9,9 +9,9 @@ import java.util.concurrent.TimeoutException;
 /**
  * @program: rabbitmq-demo
  * @description: 消费者-接受消息
- * @create: 2021-01-05 22:23
+ * @create: 2021-01-05 22:55
  **/
-public class ConsumerC2 {
+public class ConsumerC1 {
     private final static String EXCHANGE = "MESSAGE_FANOUT";
 
     public static void main(String[] args) {
