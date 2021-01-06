@@ -1,10 +1,7 @@
-package hs.rabbitmq.simple;
+package hs.rabbitmq.publishSbscribe;
 
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
-import hs.rabbitmq.simple.config.RabbitmqConfig;
+import com.rabbitmq.client.*;
+import hs.rabbitmq.config.RabbitmqConfig;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -12,24 +9,41 @@ import java.util.concurrent.TimeoutException;
 /**
  * @program: rabbitmq-demo
  * @description: 消费者-接受消息
+ * @create: 2021-01-05 22:55
  **/
-public class Consumer {
+public class ConsumerC1 {
+    private final static String EXCHANGE = "MESSAGE_FANOUT";
+
     public static void main(String[] args) {
         try {
-            Channel channel = RabbitmqConfig.getChannel();
+            final Channel channel = RabbitmqConfig.getChannel();
             /**
-             * 这里解释一下为什么需要在订阅queue之前，提前queueDeclare一下，这个是为了防止provider还没有启动，而consumer先启动了，
-             * 如果不提前声明的话，那么在rabbitmq中是不存在hello的，那么是没办法订阅消息的，反馈到程序中就是报错！
-             * 但是声明时，也要特别注意参数不要弄错
+             * 声明一个Exchange
+             * exchange：名称
+             * type：类型
              */
-            channel.queueDeclare("hello",false,false,false,null);
+            channel.exchangeDeclare(EXCHANGE, BuiltinExchangeType.FANOUT);
+            /**
+             * 随机声明一个队列，并获取对应的queue的名称
+             * 默认特性：
+             * autoDelete:true
+             * exclusive:true
+             */
+            String queueName = channel.queueDeclare().getQueue();
+            /**
+             * 绑定queue到exchange
+             * queue：队列名称
+             * exchange：交换机名称
+             * routingKey：路由key，因为exchange type是fanout，所以routingKey为空
+             */
+            channel.queueBind(queueName,EXCHANGE,"");
             /**
              * 消费消息
              * queue:队列名称
              * autoAck：消息确认机制；true：自动确认消息，false：手动确认消息
              * callback：Consumer接口，收到消息后的处理逻辑！这里直接写了一个匿名类
              */
-            channel.basicConsume("hello",true,new DefaultConsumer(channel){
+            channel.basicConsume(queueName,true,new DefaultConsumer(channel){
                 @Override
                 public void handleDelivery(String consumerTag,
                                            Envelope envelope,
@@ -38,6 +52,7 @@ public class Consumer {
                         throws IOException
                 {
                     System.out.println("Receive==="+new String(body));
+
                 }
             });
             // 若不关闭connection，则一直保持接受消息的状态
@@ -46,6 +61,5 @@ public class Consumer {
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
-
     }
 }

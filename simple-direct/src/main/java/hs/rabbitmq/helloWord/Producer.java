@@ -1,8 +1,7 @@
-package hs.rabbitmq.simple;
+package hs.rabbitmq.helloWord;
 
 import com.rabbitmq.client.*;
-import com.rabbitmq.client.impl.ChannelN;
-import hs.rabbitmq.simple.config.RabbitmqConfig;
+import hs.rabbitmq.config.RabbitmqConfig;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.util.concurrent.TimeoutException;
  * @program: rabbitmq-demo
  * @description: 消息生产者
  **/
-public class Provider {
+public class Producer {
 
     @Test
     public void publishing() {

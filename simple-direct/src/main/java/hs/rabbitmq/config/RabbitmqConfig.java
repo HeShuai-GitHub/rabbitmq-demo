@@ -1,4 +1,4 @@
-package hs.rabbitmq.simple.config;
+package hs.rabbitmq.config;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -19,7 +19,7 @@ public class RabbitmqConfig {
     private static ConnectionFactory connectionFactory = new ConnectionFactory();
     static {
         // 连接rabbitmq的主机
-        connectionFactory.setHost("127.0.0.1");
+        connectionFactory.setHost("59.110.41.57");
         // 设置连接端口号
         connectionFactory.setPort(5672);
         /**
