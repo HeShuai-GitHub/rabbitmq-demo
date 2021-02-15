@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: Rabbitmq-AMQP
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /test  # 虚拟主机
+    username: admin
+    password: admin
+    publisher-returns: true # 是否激活发布者返回
+    publisher-confirm-type: correlated  # 消息发布确认类型
+#    template:
+#      retry:
+#        enabled: true
+#      mandatory: true
+#    listener:
+#      simple:
+#        acknowledge-mode: manual # 手动确认
+#        #并发消费者初始化值
+#        concurrency: 10
+#        #并发消费者的最大值
+#        max-concurrency: 20
+#        #每个消费者每次监听时可拉取处理的消息数量
+#        prefetch: 5
+#        direct:
+#          retry:
+#            enabled: true
+#            max-attempts: 1
